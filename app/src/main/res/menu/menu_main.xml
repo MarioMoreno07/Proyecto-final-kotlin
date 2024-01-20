@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Inicio"
+        app:itemIconSize="32dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_plus"
+        android:icon="@drawable/baseline_add_circle_outline_24"
+        android:title="Más"
+        app:itemIconSize="32dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="@drawable/baseline_login_24"
+        android:title="Salir"
+        app:itemIconSize="32dp"
+        app:showAsAction="ifRoom" />
+</menu>
