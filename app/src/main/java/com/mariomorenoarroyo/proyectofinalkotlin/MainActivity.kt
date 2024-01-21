@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), TareasListener {
     private val listaDeTareas = mutableListOf<Tareas>()
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity(), TareasListener {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_logout -> {
+                   //Cerrar sesion
+                    FirebaseAuth.getInstance().signOut()
                    finish()
                     return@setOnNavigationItemSelectedListener true
                 }
