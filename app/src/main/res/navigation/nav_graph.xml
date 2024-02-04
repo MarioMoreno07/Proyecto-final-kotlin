@@ -34,7 +34,6 @@
     </fragment>
     <fragment
         android:id="@+id/primerFragment"
-        android:name="com.mariomorenoarroyo.proyectofinalkotlin.PrimerFragment"
         android:label="fragment_primer"
         tools:layout="@layout/fragment_primer" >
         <action
@@ -67,4 +66,19 @@
         android:name="com.mariomorenoarroyo.proyectofinalkotlin.OlvidarContrasenaFragment"
         android:label="fragment_olvidar_contrasena"
         tools:layout="@layout/fragment_olvidar_contrasena" />
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.mariomorenoarroyo.proyectofinalkotlin.PerfilFragment"
+        android:label="PerfilFragment" >
+        <action
+            android:id="@+id/action_perfilFragment_to_IniciarSesionFragment"
+            app:destination="@id/IniciarSesionFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_editarUsuarioFragment"
+            app:destination="@id/editarUsuarioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarUsuarioFragment"
+        android:name="com.mariomorenoarroyo.proyectofinalkotlin.EditarUsuarioFragment"
+        android:label="EditarUsuarioFragment" />
 </navigation>

@@ -25,6 +25,7 @@ import com.mariomorenoarroyo.proyectofinalkotlin.databinding.FragmentIniciarSesi
 @Suppress("DEPRECATION")
 class IniciarSesionFragment : Fragment() {
 
+
     private val GOOGLE_SIGN_IN = 100
     private lateinit var binding: FragmentIniciarSesionBinding
 

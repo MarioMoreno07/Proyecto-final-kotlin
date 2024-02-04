@@ -24,10 +24,10 @@
 
     <EditText
         android:id="@+id/editTextNombre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
         android:layout_marginTop="16dp"
-        android:hint="Nombre"
+        android:hint="Nombre de usuario"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,8 +35,8 @@
 
     <EditText
         android:id="@+id/editTextCorreo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="218dp"
+        android:layout_height="43dp"
         android:layout_marginTop="8dp"
         android:hint="Correo electrónico"
         android:inputType="textEmailAddress"
@@ -46,24 +46,38 @@
 
     <EditText
         android:id="@+id/editTextContrasena"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="217dp"
+        android:layout_height="49dp"
         android:layout_marginTop="8dp"
         android:hint="Contraseña"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="224dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Número de telefono"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextContrasena" />
 
     <Button
         android:id="@+id/botonRegistrarse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/white"
         android:text="Registrarse"
         android:textColor="@android:color/black"
-        android:backgroundTint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
@@ -71,17 +85,18 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:text="Aceptar Términos y Condiciones"
-        app:layout_constraintTop_toBottomOf="@+id/editTextContrasena"
         android:textColor="@android:color/white"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="115dp"
         android:layout_height="116dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="120dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

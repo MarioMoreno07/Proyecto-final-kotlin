@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "182251190770-h5c3shahlma51i1l35vpp6m8mhc247k0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mariomorenoarroyo.proyectofinalkotlin",
+            "certificate_hash": "64eef253286fd7d284247736ae348ffac2659e34"
+          }
+        },
+        {
           "client_id": "182251190770-sq9jotc65qsenm5ff53unrrbain6939j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

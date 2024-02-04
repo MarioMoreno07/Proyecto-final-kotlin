@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
+    android:id="@+id/fragment_detail"
     tools:context=".DetailFragment">
 
     <LinearLayout
@@ -26,7 +27,7 @@
             android:textAlignment="center"
             android:text="Nombre tarea" />
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/descripcion"

@@ -8,6 +8,5 @@ data class Tareas(
     val nombreTarea: String,
     val descripcionTarea: String,
     val lenguaje: String,
-    val numero: Int,
     val listaAmpliable: MutableList<String> = mutableListOf()
 ) : Parcelable

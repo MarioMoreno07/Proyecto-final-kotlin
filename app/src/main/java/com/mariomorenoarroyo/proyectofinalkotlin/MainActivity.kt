@@ -1,10 +1,14 @@
 package com.mariomorenoarroyo.proyectofinalkotlin
 
 
+
+import PrimerFragment
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 
@@ -14,6 +18,7 @@ class MainActivity : AppCompatActivity(), TareasListener {
 
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,10 +40,11 @@ class MainActivity : AppCompatActivity(), TareasListener {
                     replaceFragment(PrimerFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.menu_plus -> {
-                    replaceFragment(SegundoFragment())
+                R.id.menu_perfil -> {
+                    replaceFragment(PerfilFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
+
                 R.id.menu_logout -> {
                    //Cerrar sesion
                     FirebaseAuth.getInstance().signOut()
@@ -48,6 +54,11 @@ class MainActivity : AppCompatActivity(), TareasListener {
                 else -> return@setOnNavigationItemSelectedListener false
             }
         }
+        val añadir= findViewById<FloatingActionButton>(R.id.añadir)
+        añadir.setOnClickListener {
+            replaceFragment(SegundoFragment())
+        }
+
 
     }
 
