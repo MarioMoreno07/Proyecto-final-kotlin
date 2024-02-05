@@ -1,5 +1,6 @@
 package com.mariomorenoarroyo.proyectofinalkotlin
 
+import PrimerFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +55,8 @@ class SegundoFragment : Fragment() {
                         )
                     ).addOnSuccessListener { documentReference ->
                         Toast.makeText(requireContext(), "¡Tarea añadida!", Toast.LENGTH_SHORT).show()
+                        //Vuelve al primer fragment
+                        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_main, PrimerFragment()).commit()
                     }.addOnFailureListener { e ->
                         Toast.makeText(requireContext(), "Error al guardar la tarea: ${e.message}", Toast.LENGTH_SHORT).show()
                     }

@@ -5,4 +5,6 @@
     <color name="grey">#808080</color>
     <color name="fondo">#14DFDF</color>
     <color name="camara">#7AB1DC</color>
+    <color name="eliminar">#D50000</color>
+
 </resources>

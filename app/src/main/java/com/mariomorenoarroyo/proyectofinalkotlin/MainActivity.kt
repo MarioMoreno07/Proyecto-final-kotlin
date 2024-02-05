@@ -86,7 +86,8 @@ class MainActivity : AppCompatActivity(), TareasListener {
 
     override fun onTareaClick(tarea: Tareas) {
         // Navegar a DetailFragment
-        navigateToDetailFragment()
+        val detailFragment = DetailFragment.newInstance(tarea)
+        replaceFragment(detailFragment)
     }
 
 
