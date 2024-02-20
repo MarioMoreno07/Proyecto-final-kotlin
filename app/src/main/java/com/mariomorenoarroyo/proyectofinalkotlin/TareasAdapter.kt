@@ -20,6 +20,8 @@ class TareasAdapter(
                 Titulo.text = tarea.nombreTarea
                 textViewDescripcionTarea.text = tarea.descripcionTarea
                 Lenguaje.text = tarea.lenguaje
+                Lista.text = tarea.tareasPendientes
+
 
                 // Configura el onClickListener de cada elemento de la lista
                 root.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.mariomorenoarroyo.proyectofinalkotlin
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -18,6 +19,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class PerfilFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
@@ -30,7 +35,9 @@ class PerfilFragment : Fragment() {
     private lateinit var textViewUsername: TextView
     private lateinit var textViewEmail: TextView
     private lateinit var currentUserUid: String
+    private lateinit var progressBar: ProgressBar
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,14 +55,17 @@ class PerfilFragment : Fragment() {
         val btnDeleteUser = view.findViewById<Button>(R.id.buttonBorrarProfile)
         val btnEditUser = view.findViewById<Button>(R.id.buttonEditProfile)
 
-        // Obtener nombre y correo del usuario
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        val username = currentUser?.displayName
-        val email = currentUser?.email
+        // Referencia al ProgressBar
+        progressBar = view.findViewById(R.id.progressbar)
 
-        // Mostrar nombre y correo del usuario
-        textViewUsername.text = username
-        textViewEmail.text = email
+        // Mostrar ProgressBar mientras se cargan los datos del perfil
+        progressBar.visibility = View.VISIBLE
+
+        // Iniciar una corrutina para introducir un retraso de 2 segundos antes de cargar los datos del perfil
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(2000) // Retraso de 2 segundos
+            cargarDatosPerfil() // Llamada a la función para cargar los datos del perfil
+        }
 
         // Manejador para el click del FloatingActionButton
         fabAddPhoto.setOnClickListener {
@@ -75,6 +85,32 @@ class PerfilFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun cargarDatosPerfil() {
+        // Obtener nombre y correo del usuario
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val username = currentUser?.displayName
+        val email = currentUser?.email
+
+        // Mostrar nombre y correo del usuario
+        textViewUsername.text = username
+        textViewEmail.text = email
+
+        // Obtener la foto del usuario y cargarla en el ImageView
+        val storageRef=FirebaseStorage.getInstance().reference.child("profile_images/${currentUserUid}.jpg")
+        storageRef.downloadUrl.addOnSuccessListener {
+            Glide.with(this@PerfilFragment /* Context */)
+                .load(it)
+                .into(imageViewProfile)
+            // Ocultar ProgressBar una vez que los datos se han cargado con éxito
+            progressBar.visibility = View.GONE
+        }.addOnFailureListener {
+            // Manejar errores si no se puede obtener la URL de la imagen
+            Toast.makeText(requireContext(), "Error al obtener la URL de la imagen de perfil", Toast.LENGTH_SHORT).show()
+            // Ocultar ProgressBar en caso de error
+            progressBar.visibility = View.GONE
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -184,8 +220,6 @@ class PerfilFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error al obtener las tareas: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
     }
-
-
 
     private fun navigateToSignInFragment() {
         // Obtener el NavController y navegar al IniciarSesionFragment

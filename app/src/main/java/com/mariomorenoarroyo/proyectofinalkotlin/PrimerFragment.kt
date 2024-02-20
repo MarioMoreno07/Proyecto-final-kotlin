@@ -66,9 +66,10 @@ class PrimerFragment : Fragment() {
                         val nombreTarea = document.getString("nombreTarea") ?: ""
                         val descripcion = document.getString("descripcion") ?: ""
                         val lenguaje = document.getString("lenguaje") ?: ""
-
+                        val tareasPendientes = document.getString("tareasPendientes") ?: ""
+                        val id=document.id
                         // Crear objeto Tareas y agregarlo a la lista
-                        val tarea = Tareas(nombreTarea, descripcion, lenguaje)
+                        val tarea = Tareas(id,nombreTarea, descripcion, lenguaje, tareasPendientes)
                         listaDeTareas.add(tarea)
                     }
 

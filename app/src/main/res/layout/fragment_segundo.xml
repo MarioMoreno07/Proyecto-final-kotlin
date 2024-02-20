@@ -9,72 +9,86 @@
     android:orientation="vertical"
     tools:context=".SegundoFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <!-- ScrollView envuelve todas las vistas -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1"
-        android:text="Crear una tarea"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-16dp" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/NombreTarea"
-        android:layout_width="263dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="78dp"
-        android:layout_weight="1"
+        <!-- LinearLayout para alinear verticalmente las vistas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:orientation="vertical">
 
-        android:hint="Nombre de la tarea"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:text="Crear una tarea"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/Descripcion"
-        android:layout_width="267dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1"
+            <EditText
+                android:id="@+id/NombreTarea"
+                android:layout_width="263dp"
+                android:layout_gravity="center"
+                android:layout_height="60dp"
+                android:layout_marginTop="78dp"
+                android:layout_weight="1"
+                android:hint="Nombre de la tarea"
+                tools:ignore="MissingConstraints" />
 
-        android:hint="Descripcion de la tarea"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NombreTarea"
-        tools:ignore="MissingConstraints" />
+            <EditText
+                android:id="@+id/Descripcion"
+                android:layout_width="267dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:hint="Descripcion de la tarea"
+                tools:ignore="MissingConstraints" />
 
-    <Spinner
-        android:id="@+id/Opciones"
-        android:layout_width="269dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="30dp"
-        android:layout_weight="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Descripcion"
-        tools:ignore="MissingConstraints" />
+            <EditText
+                android:id="@+id/TareasPendientes"
+                android:layout_width="267dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:hint=" Tareas pendientes"
+                tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="143dp"
-        android:backgroundTint="@color/white"
-        android:text="Añadir tarea"
-        android:gravity="center"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Opciones"
-        tools:ignore="MissingConstraints" />
+            <Spinner
+                android:id="@+id/Opciones"
+                android:layout_width="269dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                tools:ignore="MissingConstraints" />
 
+            <Button
+                android:id="@+id/button"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="142dp"
+                android:layout_marginTop="76dp"
+                android:layout_marginEnd="143dp"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Añadir tarea"
+                android:textColor="@color/black"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

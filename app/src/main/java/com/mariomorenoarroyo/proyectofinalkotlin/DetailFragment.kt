@@ -1,28 +1,26 @@
-package com.mariomorenoarroyo.proyectofinalkotlin
-
-import PrimerFragment
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.mariomorenoarroyo.proyectofinalkotlin.R
+import com.mariomorenoarroyo.proyectofinalkotlin.Tareas
 import com.mariomorenoarroyo.proyectofinalkotlin.databinding.FragmentDetailBinding
+import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
     private val db = FirebaseFirestore.getInstance()
     private val currentUserEmail: String = FirebaseAuth.getInstance().currentUser?.email ?: ""
-    private val currentTask: String = FirebaseFirestore.getInstance().collection("tareas").document(currentUserEmail).collection("misTareas").document().id
 
     companion object {
         private const val ARG_TAREA = "tarea"
 
-        // Método estático para crear una nueva instancia del DetailFragment con la tarea como argumento
         fun newInstance(tarea: Tareas): DetailFragment {
             val fragment = DetailFragment()
             val args = Bundle()
@@ -36,7 +34,6 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,49 +41,77 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.btnEliminar.setOnClickListener {
-            deleteTask()
+            val tarea = arguments?.getSerializable(ARG_TAREA) as? Tareas
+            tarea?.id?.let { taskId ->
+                // Lanzar una corrutina para eliminar la tarea por su ID
+                lifecycleScope.launch {
+                    deleteTask(taskId)
+                }
+            }
         }
 
-        // Obtener la tarea pasada como argumento
         val tarea = arguments?.getSerializable(ARG_TAREA) as? Tareas
         if (tarea != null) {
-            // Llamar a obtenerTareasDeFirestore() con la tarea
-            obtenerTareasDeFirestore(tarea)
+            mostrarDetallesTarea(tarea)
         } else {
-           Toast.makeText(requireContext(), "Error al obtener la tarea", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Error al obtener la tarea", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun obtenerTareasDeFirestore(tarea: Tareas) {
-        // Obtener los datos de la tarea y mostrarlos en el layout
-        binding.nombre.text = tarea.nombreTarea
-        binding.descripcion.text = tarea.descripcionTarea
+    private fun mostrarDetallesTarea(tarea: Tareas) {
+        // Limpiar los campos antes de mostrar los nuevos datos
+        binding.nombre.text = ""
+        binding.descripcion.text = ""
+        binding.TareasPen.text = ""
 
-
+        // Obtener todos los detalles de la tarea desde Firebase utilizando su ID
+        obtenerDetallesTarea(tarea.id)
     }
 
-    private fun deleteTask() {
-        db.collection("tareas").document(currentUserEmail).collection("misTareas")
+    private fun obtenerDetallesTarea(taskId: String) {
+        // Consultar Firebase para obtener todos los detalles de la tarea utilizando su ID
+        db.collection("tareas").document(currentUserEmail).collection("misTareas").document(taskId)
             .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    document.reference.delete()
-                        .addOnSuccessListener {
-                            Toast.makeText(requireContext(), "Tarea eliminada correctamente", Toast.LENGTH_SHORT).show()
-                            //navegar a PrimerFragment
-                            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_main, PrimerFragment()).commit()
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(requireContext(), "Error al eliminar la tarea: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val nombreTarea = documentSnapshot.getString("nombreTarea") ?: ""
+                    val descripcion = documentSnapshot.getString("descripcion") ?: ""
+                    val tareaPendientes = documentSnapshot.getString("tareaPendientes") ?: ""
+
+                    // Mostrar los detalles en los campos correspondientes
+                    binding.nombre.text = nombreTarea
+                    binding.descripcion.text = descripcion
+                    binding.TareasPen.text = tareaPendientes
+                } else {
+                    Toast.makeText(requireContext(), "No se encontraron detalles para esta tarea", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(requireContext(), "Error al obtener las tareas: ${exception.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error al obtener los detalles de la tarea: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+
+    private fun deleteTask(taskId: String) {
+        db.collection("tareas").document(currentUserEmail).collection("misTareas").document(taskId)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(
+                    requireContext(),
+                    "Tarea eliminada correctamente",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //Vuelve al primer fragment
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_main, PrimerFragment()).commit()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(
+                    requireContext(),
+                    "Error al eliminar la tarea: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 }
-
-

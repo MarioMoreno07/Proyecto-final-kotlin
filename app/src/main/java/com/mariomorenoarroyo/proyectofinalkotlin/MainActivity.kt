@@ -1,12 +1,12 @@
 package com.mariomorenoarroyo.proyectofinalkotlin
 
-
-
+import DetailFragment
 import PrimerFragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.FirebaseApp
@@ -16,18 +16,13 @@ class MainActivity : AppCompatActivity(), TareasListener {
     private val listaDeTareas = mutableListOf<Tareas>()
     private lateinit var tareasAdapter: TareasAdapter
 
-
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         // Inicializar Firebase
         FirebaseApp.initializeApp(this)
-
 
         // Inicializar el adaptador y configurar el RecyclerView
         tareasAdapter = TareasAdapter(listaDeTareas, this)
@@ -37,18 +32,18 @@ class MainActivity : AppCompatActivity(), TareasListener {
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_home -> {
-                    replaceFragment(PrimerFragment())
+                    replaceFragmentWithAnimation(PrimerFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_perfil -> {
-                    replaceFragment(PerfilFragment())
+                    replaceFragmentWithAnimation(PerfilFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.menu_logout -> {
-                   //Cerrar sesion
+                    // Cerrar sesión
                     FirebaseAuth.getInstance().signOut()
-                   finish()
+                    finish()
                     return@setOnNavigationItemSelectedListener true
                 }
                 else -> return@setOnNavigationItemSelectedListener false
@@ -56,15 +51,9 @@ class MainActivity : AppCompatActivity(), TareasListener {
         }
         val añadir= findViewById<FloatingActionButton>(R.id.añadir)
         añadir.setOnClickListener {
-            replaceFragment(SegundoFragment())
+            replaceFragmentWithAnimation(SegundoFragment())
         }
-
-
     }
-
-
-
-
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
@@ -73,8 +62,17 @@ class MainActivity : AppCompatActivity(), TareasListener {
             .commit()
     }
 
+    private fun replaceFragmentWithAnimation(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.side_right, // Animación de entrada
+                R.anim.side_left, // Animación de salida
 
-
+            )
+            .replace(R.id.nav_host_fragment_main, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
     override fun agregarTarea(tarea: Tareas) {
         // Agregar tarea a la lista
@@ -87,15 +85,10 @@ class MainActivity : AppCompatActivity(), TareasListener {
     override fun onTareaClick(tarea: Tareas) {
         // Navegar a DetailFragment
         val detailFragment = DetailFragment.newInstance(tarea)
-        replaceFragment(detailFragment)
+        replaceFragmentWithAnimation(detailFragment)
     }
-
-
 
     fun navigateToDetailFragment() {
-        replaceFragment(DetailFragment())
+        replaceFragmentWithAnimation(DetailFragment())
     }
-
-
-
 }

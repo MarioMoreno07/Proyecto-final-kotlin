@@ -1,6 +1,7 @@
 package com.mariomorenoarroyo.proyectofinalkotlin
 
 import PrimerFragment
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,15 +19,18 @@ class SegundoFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private lateinit var currentUserEmail: String
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_segundo, container, false)
 
         val nombreTarea = view.findViewById<EditText>(R.id.NombreTarea)
         val descripcion = view.findViewById<EditText>(R.id.Descripcion)
         val opcionesSpinner = view.findViewById<Spinner>(R.id.Opciones)
+        val tareaPendientes= view.findViewById<EditText>(R.id.TareasPendientes)
         val buttonAñadirTarea = view.findViewById<Button>(R.id.button)
 
         // Obtener el email del usuario actual
@@ -41,8 +45,8 @@ class SegundoFragment : Fragment() {
                 val nombreTexto = nombreTarea.text.toString()
                 val descripcionTexto = descripcion.text.toString()
                 val opcionSeleccionada = opciones[opcionesSpinner.selectedItemPosition] // Obtener la opción seleccionada del Spinner
-
-                if (nombreTexto.isBlank() || descripcionTexto.isBlank()) {
+                val tareaPendientesTexto = tareaPendientes.text.toString()
+                if (nombreTexto.isBlank() || descripcionTexto.isBlank() || tareaPendientesTexto.isBlank()) {
                     Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
                 } else {
 
@@ -52,6 +56,7 @@ class SegundoFragment : Fragment() {
                             "nombreTarea" to nombreTarea.text.toString(),
                             "descripcion" to descripcion.text.toString(),
                             "lenguaje" to opcionSeleccionada,
+                            "tareaPendientes" to tareaPendientes.text.toString()
                         )
                     ).addOnSuccessListener { documentReference ->
                         Toast.makeText(requireContext(), "¡Tarea añadida!", Toast.LENGTH_SHORT).show()
@@ -64,6 +69,7 @@ class SegundoFragment : Fragment() {
                     // Limpiar campos
                     nombreTarea.setText("")
                     descripcion.setText("")
+                    tareaPendientes.setText("")
                 }
             }
         }

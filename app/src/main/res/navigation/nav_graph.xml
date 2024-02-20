@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_detailFragment_to_primerFragment"
             app:destination="@id/primerFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_editarTareaFragment"
+            app:destination="@id/editarTareaFragment" />
     </fragment>
     <fragment
         android:id="@+id/IniciarSesionFragment"
@@ -81,4 +84,9 @@
         android:id="@+id/editarUsuarioFragment"
         android:name="com.mariomorenoarroyo.proyectofinalkotlin.EditarUsuarioFragment"
         android:label="EditarUsuarioFragment" />
+    <fragment
+        android:id="@+id/editarTareaFragment"
+        android:name="com.mariomorenoarroyo.proyectofinalkotlin.EditarTareaFragment"
+        android:label="fragment_editar_tarea"
+        tools:layout="@layout/fragment_editar_tarea" />
 </navigation>

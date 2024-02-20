@@ -6,8 +6,9 @@ import java.io.Serializable
 
 @Parcelize
 data class Tareas(
+    val id:String,
     val nombreTarea: String,
     val descripcionTarea: String,
     val lenguaje: String,
-    val listaAmpliable: MutableList<String> = mutableListOf()
+    val tareasPendientes: String
 ) : Parcelable, Serializable
