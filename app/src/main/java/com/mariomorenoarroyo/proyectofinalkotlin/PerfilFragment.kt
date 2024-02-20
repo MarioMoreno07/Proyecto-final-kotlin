@@ -76,7 +76,6 @@ class PerfilFragment : Fragment() {
 
         // Manejador para el click del botón eliminar usuario
         btnDeleteUser.setOnClickListener {
-            // Eliminar usuario y documento asociado en Firebase Authentication y Firestore
             deleteCurrentUser()
         }
 

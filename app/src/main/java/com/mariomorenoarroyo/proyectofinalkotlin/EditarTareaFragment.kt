@@ -91,7 +91,6 @@ class EditarTareaFragment : Fragment() {
     companion object {
         private const val ARG_TAREA = "tarea"
 
-        // Método estático para crear una nueva instancia del EditarTareaFragment con la tarea como argumento
         fun newInstance(tarea: Tareas): EditarTareaFragment {
             val fragment = EditarTareaFragment()
             val args = Bundle()

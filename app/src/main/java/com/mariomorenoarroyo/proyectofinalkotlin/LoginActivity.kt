@@ -19,7 +19,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        // Encuentra el NavHostFragment usando el ID del contenedor en tu diseño
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         // Obtiene el NavController desde el NavHostFragment

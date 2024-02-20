@@ -27,7 +27,7 @@ class OlvidarContrasenaFragment : Fragment() {
             val correoElectronico = correoElectronicoEditText.text.toString().trim()
 
             if (correoElectronico.isNotEmpty()) {
-                // El correo electrónico no está vacío, procede con el restablecimiento
+
                 restablecerContrasena(correoElectronico)
             } else {
                 // Muestra un mensaje o realiza alguna acción cuando el correo electrónico esté vacío

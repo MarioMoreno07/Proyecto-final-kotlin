@@ -67,12 +67,10 @@ class DetailFragment : Fragment() {
     }
 
     private fun mostrarDetallesTarea(tarea: Tareas) {
-        // Limpiar los campos antes de mostrar los nuevos datos
         binding.nombre.text = ""
         binding.descripcion.text = ""
         binding.TareasPen.text = ""
 
-        // Obtener todos los detalles de la tarea desde Firebase utilizando su ID
         obtenerDetallesTarea(tarea.id)
     }
 
@@ -128,7 +126,7 @@ class DetailFragment : Fragment() {
         if (tarea != null) {
             val editTareaFragment = EditarTareaFragment.newInstance(tarea)
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_main, editTareaFragment) // Reemplaza R.id.fragment_container_view con el ID correcto del contenedor de fragmentos
+                .replace(R.id.nav_host_fragment_main, editTareaFragment)
                 .addToBackStack(null) // Permite volver al fragmento anterior
                 .commit()
         } else {
