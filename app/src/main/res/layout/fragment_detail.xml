@@ -59,6 +59,14 @@
                 android:textSize="20dp"
                 android:paddingBottom="15dp" />
 
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="Editar"
+                android:textColor="@color/black" />
+
 
             <Button
                 android:id="@+id/btnEliminar"

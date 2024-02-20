@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:orientation="vertical"
+    tools:context=".SegundoFragment">
+
+    <!-- ScrollView envuelve todas las vistas -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- LinearLayout para alinear verticalmente las vistas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:text="Editar una tarea"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/NombreTarea"
+                android:layout_width="263dp"
+                android:layout_gravity="center"
+                android:layout_height="60dp"
+                android:layout_marginTop="78dp"
+                android:layout_weight="1"
+                android:hint="Nombre de la tarea"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/Descripcion"
+                android:layout_width="267dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:hint="Descripcion de la tarea"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/TareasPendientes"
+                android:layout_width="267dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:hint=" Tareas pendientes"
+                tools:ignore="MissingConstraints" />
+
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="142dp"
+                android:layout_marginTop="76dp"
+                android:layout_marginEnd="143dp"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Aceptar"
+                android:textColor="@color/black"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

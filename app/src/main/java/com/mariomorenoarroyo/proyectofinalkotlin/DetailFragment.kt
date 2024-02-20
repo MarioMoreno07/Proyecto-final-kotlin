@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.mariomorenoarroyo.proyectofinalkotlin.EditarTareaFragment
 import com.mariomorenoarroyo.proyectofinalkotlin.R
 import com.mariomorenoarroyo.proyectofinalkotlin.Tareas
 import com.mariomorenoarroyo.proyectofinalkotlin.databinding.FragmentDetailBinding
@@ -49,6 +50,12 @@ class DetailFragment : Fragment() {
                     deleteTask(taskId)
                 }
             }
+        }
+
+        binding.btnEditar.setOnClickListener{
+            //Moverme al editTareaFragment
+            navigateToEditTareaFragment()
+
         }
 
         val tarea = arguments?.getSerializable(ARG_TAREA) as? Tareas
@@ -114,4 +121,19 @@ class DetailFragment : Fragment() {
                 ).show()
             }
     }
+
+
+    private fun navigateToEditTareaFragment() {
+        val tarea = arguments?.getSerializable(ARG_TAREA) as? Tareas
+        if (tarea != null) {
+            val editTareaFragment = EditarTareaFragment.newInstance(tarea)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_main, editTareaFragment) // Reemplaza R.id.fragment_container_view con el ID correcto del contenedor de fragmentos
+                .addToBackStack(null) // Permite volver al fragmento anterior
+                .commit()
+        } else {
+            Toast.makeText(requireContext(), "Error al obtener la tarea", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
